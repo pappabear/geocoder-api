@@ -1,5 +1,9 @@
 'use strict'
 
+exports.check_for_pulse = function(req, res) {
+	var pulse = {"hello":"heroku"}
+	res.json(pulse)
+}
 
 exports.get_geocode_data = function(req, res) {
 
