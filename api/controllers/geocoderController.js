@@ -12,11 +12,8 @@ exports.get_geocode_data = function(req, res) {
 //	console.log("--------------------------------")
 //	console.log("Entering the node.js geocoder...")
 //	console.log("Requested address is " + req.body.address)
-//	console.log("Initiating call to FFIEC web service...")
+//	console.log("Initiating call to FFIEC...")
 
-	console.log(req.query.address)
-	console.log(decodeURI(req.query.address))
-	
 	//var jsonToSend = "{sSingleLine:'" + req.body.address + "', iCensusYear:'2017'}"
 	var jsonToSend = "{sSingleLine:'" + req.query.address + "', iCensusYear:'2017'}"
 	var ffiec = {}
@@ -29,7 +26,6 @@ exports.get_geocode_data = function(req, res) {
 		.set("Content-Type", "application/json; charset=UTF-8")
 		.set("Referer", "https://geomap.ffiec.gov/FFIECGeocMap/GeocodeMap1.aspx")
 		.set("Accept", "application/json, text/javascript, */*; q=0.01")
-		//.set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/603.2.5 (KHTML, like Gecko) Version/10.1.1 Safari/603.2.5")
 		.set("Origin", "https://geomap.ffiec.gov")
 		.set("X-Requested-With", "XMLHttpRequest")
 	    .end((err2, res2) => {
@@ -43,7 +39,7 @@ exports.get_geocode_data = function(req, res) {
             }
 			else
 			{
-				console.log('Geocoder API call succeeded!')
+				//console.log('Geocoder API call succeeded!')
 				//console.log(res2.body.d)
 				returnPayload.source = "FFIEC"
 				returnPayload.originalAddress = req.query.address  //req.body.address.trim() //res2.body.d.sMatchAddr.trim()
