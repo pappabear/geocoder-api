@@ -1,7 +1,7 @@
 'use strict'
 
 exports.check_for_pulse = function(req, res) {
-	var pulse = {"hello":"heroku"}
+	var pulse = {"addressReceived":req.query.address}
 	res.json(pulse)
 }
 
