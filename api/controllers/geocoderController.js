@@ -14,7 +14,11 @@ exports.get_geocode_data = function(req, res) {
 //	console.log("Requested address is " + req.body.address)
 //	console.log("Initiating call to FFIEC web service...")
 
-	var jsonToSend = "{sSingleLine:'" + req.body.address + "', iCensusYear:'2017'}"
+	console.log(req.query.address)
+	console.log(decodeURI(req.query.address))
+	
+	//var jsonToSend = "{sSingleLine:'" + req.body.address + "', iCensusYear:'2017'}"
+	var jsonToSend = "{sSingleLine:'" + req.query.address + "', iCensusYear:'2017'}"
 	var ffiec = {}
 	var d = {}
 	var returnPayload = {}
@@ -42,7 +46,7 @@ exports.get_geocode_data = function(req, res) {
 				console.log('Geocoder API call succeeded!')
 				//console.log(res2.body.d)
 				returnPayload.source = "FFIEC"
-				returnPayload.originalAddress = req.body.address.trim() //res2.body.d.sMatchAddr.trim()
+				returnPayload.originalAddress = req.query.address  //req.body.address.trim() //res2.body.d.sMatchAddr.trim()
 			    returnPayload.address = res2.body.d.sAddress.trim()
 			    returnPayload.city = res2.body.d.sCityName.trim()
 			    returnPayload.countyCode = res2.body.d.sCountyCode.trim()
